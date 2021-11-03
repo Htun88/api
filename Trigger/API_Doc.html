@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>API&colon; Trigger</title>
+        <style>
+/* From extension vscode.markdown-math */
+@font-face{font-family:KaTeX_AMS;src:url(fonts/KaTeX_AMS-Regular.woff2) format("woff2"),url(fonts/KaTeX_AMS-Regular.woff) format("woff"),url(fonts/KaTeX_AMS-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Bold.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Bold.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Caligraphic;src:url(fonts/KaTeX_Caligraphic-Regular.woff2) format("woff2"),url(fonts/KaTeX_Caligraphic-Regular.woff) format("woff"),url(fonts/KaTeX_Caligraphic-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Bold.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Bold.woff) format("woff"),url(fonts/KaTeX_Fraktur-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Fraktur;src:url(fonts/KaTeX_Fraktur-Regular.woff2) format("woff2"),url(fonts/KaTeX_Fraktur-Regular.woff) format("woff"),url(fonts/KaTeX_Fraktur-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Bold.woff2) format("woff2"),url(fonts/KaTeX_Main-Bold.woff) format("woff"),url(fonts/KaTeX_Main-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Main-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Main-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Italic.woff2) format("woff2"),url(fonts/KaTeX_Main-Italic.woff) format("woff"),url(fonts/KaTeX_Main-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:KaTeX_Main;src:url(fonts/KaTeX_Main-Regular.woff2) format("woff2"),url(fonts/KaTeX_Main-Regular.woff) format("woff"),url(fonts/KaTeX_Main-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-BoldItalic.woff2) format("woff2"),url(fonts/KaTeX_Math-BoldItalic.woff) format("woff"),url(fonts/KaTeX_Math-BoldItalic.ttf) format("truetype");font-weight:700;font-style:italic}@font-face{font-family:KaTeX_Math;src:url(fonts/KaTeX_Math-Italic.woff2) format("woff2"),url(fonts/KaTeX_Math-Italic.woff) format("woff"),url(fonts/KaTeX_Math-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Bold.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Bold.woff) format("woff"),url(fonts/KaTeX_SansSerif-Bold.ttf) format("truetype");font-weight:700;font-style:normal}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Italic.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Italic.woff) format("woff"),url(fonts/KaTeX_SansSerif-Italic.ttf) format("truetype");font-weight:400;font-style:italic}@font-face{font-family:"KaTeX_SansSerif";src:url(fonts/KaTeX_SansSerif-Regular.woff2) format("woff2"),url(fonts/KaTeX_SansSerif-Regular.woff) format("woff"),url(fonts/KaTeX_SansSerif-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Script;src:url(fonts/KaTeX_Script-Regular.woff2) format("woff2"),url(fonts/KaTeX_Script-Regular.woff) format("woff"),url(fonts/KaTeX_Script-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size1;src:url(fonts/KaTeX_Size1-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size1-Regular.woff) format("woff"),url(fonts/KaTeX_Size1-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size2;src:url(fonts/KaTeX_Size2-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size2-Regular.woff) format("woff"),url(fonts/KaTeX_Size2-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size3;src:url(fonts/KaTeX_Size3-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size3-Regular.woff) format("woff"),url(fonts/KaTeX_Size3-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Size4;src:url(fonts/KaTeX_Size4-Regular.woff2) format("woff2"),url(fonts/KaTeX_Size4-Regular.woff) format("woff"),url(fonts/KaTeX_Size4-Regular.ttf) format("truetype");font-weight:400;font-style:normal}@font-face{font-family:KaTeX_Typewriter;src:url(fonts/KaTeX_Typewriter-Regular.woff2) format("woff2"),url(fonts/KaTeX_Typewriter-Regular.woff) format("woff"),url(fonts/KaTeX_Typewriter-Regular.ttf) format("truetype");font-weight:400;font-style:normal}.katex{font:normal 1.21em KaTeX_Main,Times New Roman,serif;line-height:1.2;text-indent:0;text-rendering:auto;border-color:currentColor}.katex *{-ms-high-contrast-adjust:none!important}.katex .katex-version:after{content:"0.13.0"}.katex .katex-mathml{position:absolute;clip:rect(1px,1px,1px,1px);padding:0;border:0;height:1px;width:1px;overflow:hidden}.katex .katex-html>.newline{display:block}.katex .base{position:relative;white-space:nowrap;width:-webkit-min-content;width:-moz-min-content;width:min-content}.katex .base,.katex .strut{display:inline-block}.katex .textbf{font-weight:700}.katex .textit{font-style:italic}.katex .textrm{font-family:KaTeX_Main}.katex .textsf{font-family:KaTeX_SansSerif}.katex .texttt{font-family:KaTeX_Typewriter}.katex .mathnormal{font-family:KaTeX_Math;font-style:italic}.katex .mathit{font-family:KaTeX_Main;font-style:italic}.katex .mathrm{font-style:normal}.katex .mathbf{font-family:KaTeX_Main;font-weight:700}.katex .boldsymbol{font-family:KaTeX_Math;font-weight:700;font-style:italic}.katex .amsrm,.katex .mathbb,.katex .textbb{font-family:KaTeX_AMS}.katex .mathcal{font-family:KaTeX_Caligraphic}.katex .mathfrak,.katex .textfrak{font-family:KaTeX_Fraktur}.katex .mathtt{font-family:KaTeX_Typewriter}.katex .mathscr,.katex .textscr{font-family:KaTeX_Script}.katex .mathsf,.katex .textsf{font-family:KaTeX_SansSerif}.katex .mathboldsf,.katex .textboldsf{font-family:KaTeX_SansSerif;font-weight:700}.katex .mathitsf,.katex .textitsf{font-family:KaTeX_SansSerif;font-style:italic}.katex .mainrm{font-family:KaTeX_Main;font-style:normal}.katex .vlist-t{display:inline-table;table-layout:fixed;border-collapse:collapse}.katex .vlist-r{display:table-row}.katex .vlist{display:table-cell;vertical-align:bottom;position:relative}.katex .vlist>span{display:block;height:0;position:relative}.katex .vlist>span>span{display:inline-block}.katex .vlist>span>.pstrut{overflow:hidden;width:0}.katex .vlist-t2{margin-right:-2px}.katex .vlist-s{display:table-cell;vertical-align:bottom;font-size:1px;width:2px;min-width:2px}.katex .vbox{display:inline-flex;flex-direction:column;align-items:baseline}.katex .hbox{width:100%}.katex .hbox,.katex .thinbox{display:inline-flex;flex-direction:row}.katex .thinbox{width:0;max-width:0}.katex .msupsub{text-align:left}.katex .mfrac>span>span{text-align:center}.katex .mfrac .frac-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline,.katex .hline,.katex .mfrac .frac-line,.katex .overline .overline-line,.katex .rule,.katex .underline .underline-line{min-height:1px}.katex .mspace{display:inline-block}.katex .clap,.katex .llap,.katex .rlap{width:0;position:relative}.katex .clap>.inner,.katex .llap>.inner,.katex .rlap>.inner{position:absolute}.katex .clap>.fix,.katex .llap>.fix,.katex .rlap>.fix{display:inline-block}.katex .llap>.inner{right:0}.katex .clap>.inner,.katex .rlap>.inner{left:0}.katex .clap>.inner>span{margin-left:-50%;margin-right:50%}.katex .rule{display:inline-block;border:0 solid;position:relative}.katex .hline,.katex .overline .overline-line,.katex .underline .underline-line{display:inline-block;width:100%;border-bottom-style:solid}.katex .hdashline{display:inline-block;width:100%;border-bottom-style:dashed}.katex .sqrt>.root{margin-left:.27777778em;margin-right:-.55555556em}.katex .fontsize-ensurer.reset-size1.size1,.katex .sizing.reset-size1.size1{font-size:1em}.katex .fontsize-ensurer.reset-size1.size2,.katex .sizing.reset-size1.size2{font-size:1.2em}.katex .fontsize-ensurer.reset-size1.size3,.katex .sizing.reset-size1.size3{font-size:1.4em}.katex .fontsize-ensurer.reset-size1.size4,.katex .sizing.reset-size1.size4{font-size:1.6em}.katex .fontsize-ensurer.reset-size1.size5,.katex .sizing.reset-size1.size5{font-size:1.8em}.katex .fontsize-ensurer.reset-size1.size6,.katex .sizing.reset-size1.size6{font-size:2em}.katex .fontsize-ensurer.reset-size1.size7,.katex .sizing.reset-size1.size7{font-size:2.4em}.katex .fontsize-ensurer.reset-size1.size8,.katex .sizing.reset-size1.size8{font-size:2.88em}.katex .fontsize-ensurer.reset-size1.size9,.katex .sizing.reset-size1.size9{font-size:3.456em}.katex .fontsize-ensurer.reset-size1.size10,.katex .sizing.reset-size1.size10{font-size:4.148em}.katex .fontsize-ensurer.reset-size1.size11,.katex .sizing.reset-size1.size11{font-size:4.976em}.katex .fontsize-ensurer.reset-size2.size1,.katex .sizing.reset-size2.size1{font-size:.83333333em}.katex .fontsize-ensurer.reset-size2.size2,.katex .sizing.reset-size2.size2{font-size:1em}.katex .fontsize-ensurer.reset-size2.size3,.katex .sizing.reset-size2.size3{font-size:1.16666667em}.katex .fontsize-ensurer.reset-size2.size4,.katex .sizing.reset-size2.size4{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size2.size5,.katex .sizing.reset-size2.size5{font-size:1.5em}.katex .fontsize-ensurer.reset-size2.size6,.katex .sizing.reset-size2.size6{font-size:1.66666667em}.katex .fontsize-ensurer.reset-size2.size7,.katex .sizing.reset-size2.size7{font-size:2em}.katex .fontsize-ensurer.reset-size2.size8,.katex .sizing.reset-size2.size8{font-size:2.4em}.katex .fontsize-ensurer.reset-size2.size9,.katex .sizing.reset-size2.size9{font-size:2.88em}.katex .fontsize-ensurer.reset-size2.size10,.katex .sizing.reset-size2.size10{font-size:3.45666667em}.katex .fontsize-ensurer.reset-size2.size11,.katex .sizing.reset-size2.size11{font-size:4.14666667em}.katex .fontsize-ensurer.reset-size3.size1,.katex .sizing.reset-size3.size1{font-size:.71428571em}.katex .fontsize-ensurer.reset-size3.size2,.katex .sizing.reset-size3.size2{font-size:.85714286em}.katex .fontsize-ensurer.reset-size3.size3,.katex .sizing.reset-size3.size3{font-size:1em}.katex .fontsize-ensurer.reset-size3.size4,.katex .sizing.reset-size3.size4{font-size:1.14285714em}.katex .fontsize-ensurer.reset-size3.size5,.katex .sizing.reset-size3.size5{font-size:1.28571429em}.katex .fontsize-ensurer.reset-size3.size6,.katex .sizing.reset-size3.size6{font-size:1.42857143em}.katex .fontsize-ensurer.reset-size3.size7,.katex .sizing.reset-size3.size7{font-size:1.71428571em}.katex .fontsize-ensurer.reset-size3.size8,.katex .sizing.reset-size3.size8{font-size:2.05714286em}.katex .fontsize-ensurer.reset-size3.size9,.katex .sizing.reset-size3.size9{font-size:2.46857143em}.katex .fontsize-ensurer.reset-size3.size10,.katex .sizing.reset-size3.size10{font-size:2.96285714em}.katex .fontsize-ensurer.reset-size3.size11,.katex .sizing.reset-size3.size11{font-size:3.55428571em}.katex .fontsize-ensurer.reset-size4.size1,.katex .sizing.reset-size4.size1{font-size:.625em}.katex .fontsize-ensurer.reset-size4.size2,.katex .sizing.reset-size4.size2{font-size:.75em}.katex .fontsize-ensurer.reset-size4.size3,.katex .sizing.reset-size4.size3{font-size:.875em}.katex .fontsize-ensurer.reset-size4.size4,.katex .sizing.reset-size4.size4{font-size:1em}.katex .fontsize-ensurer.reset-size4.size5,.katex .sizing.reset-size4.size5{font-size:1.125em}.katex .fontsize-ensurer.reset-size4.size6,.katex .sizing.reset-size4.size6{font-size:1.25em}.katex .fontsize-ensurer.reset-size4.size7,.katex .sizing.reset-size4.size7{font-size:1.5em}.katex .fontsize-ensurer.reset-size4.size8,.katex .sizing.reset-size4.size8{font-size:1.8em}.katex .fontsize-ensurer.reset-size4.size9,.katex .sizing.reset-size4.size9{font-size:2.16em}.katex .fontsize-ensurer.reset-size4.size10,.katex .sizing.reset-size4.size10{font-size:2.5925em}.katex .fontsize-ensurer.reset-size4.size11,.katex .sizing.reset-size4.size11{font-size:3.11em}.katex .fontsize-ensurer.reset-size5.size1,.katex .sizing.reset-size5.size1{font-size:.55555556em}.katex .fontsize-ensurer.reset-size5.size2,.katex .sizing.reset-size5.size2{font-size:.66666667em}.katex .fontsize-ensurer.reset-size5.size3,.katex .sizing.reset-size5.size3{font-size:.77777778em}.katex .fontsize-ensurer.reset-size5.size4,.katex .sizing.reset-size5.size4{font-size:.88888889em}.katex .fontsize-ensurer.reset-size5.size5,.katex .sizing.reset-size5.size5{font-size:1em}.katex .fontsize-ensurer.reset-size5.size6,.katex .sizing.reset-size5.size6{font-size:1.11111111em}.katex .fontsize-ensurer.reset-size5.size7,.katex .sizing.reset-size5.size7{font-size:1.33333333em}.katex .fontsize-ensurer.reset-size5.size8,.katex .sizing.reset-size5.size8{font-size:1.6em}.katex .fontsize-ensurer.reset-size5.size9,.katex .sizing.reset-size5.size9{font-size:1.92em}.katex .fontsize-ensurer.reset-size5.size10,.katex .sizing.reset-size5.size10{font-size:2.30444444em}.katex .fontsize-ensurer.reset-size5.size11,.katex .sizing.reset-size5.size11{font-size:2.76444444em}.katex .fontsize-ensurer.reset-size6.size1,.katex .sizing.reset-size6.size1{font-size:.5em}.katex .fontsize-ensurer.reset-size6.size2,.katex .sizing.reset-size6.size2{font-size:.6em}.katex .fontsize-ensurer.reset-size6.size3,.katex .sizing.reset-size6.size3{font-size:.7em}.katex .fontsize-ensurer.reset-size6.size4,.katex .sizing.reset-size6.size4{font-size:.8em}.katex .fontsize-ensurer.reset-size6.size5,.katex .sizing.reset-size6.size5{font-size:.9em}.katex .fontsize-ensurer.reset-size6.size6,.katex .sizing.reset-size6.size6{font-size:1em}.katex .fontsize-ensurer.reset-size6.size7,.katex .sizing.reset-size6.size7{font-size:1.2em}.katex .fontsize-ensurer.reset-size6.size8,.katex .sizing.reset-size6.size8{font-size:1.44em}.katex .fontsize-ensurer.reset-size6.size9,.katex .sizing.reset-size6.size9{font-size:1.728em}.katex .fontsize-ensurer.reset-size6.size10,.katex .sizing.reset-size6.size10{font-size:2.074em}.katex .fontsize-ensurer.reset-size6.size11,.katex .sizing.reset-size6.size11{font-size:2.488em}.katex .fontsize-ensurer.reset-size7.size1,.katex .sizing.reset-size7.size1{font-size:.41666667em}.katex .fontsize-ensurer.reset-size7.size2,.katex .sizing.reset-size7.size2{font-size:.5em}.katex .fontsize-ensurer.reset-size7.size3,.katex .sizing.reset-size7.size3{font-size:.58333333em}.katex .fontsize-ensurer.reset-size7.size4,.katex .sizing.reset-size7.size4{font-size:.66666667em}.katex .fontsize-ensurer.reset-size7.size5,.katex .sizing.reset-size7.size5{font-size:.75em}.katex .fontsize-ensurer.reset-size7.size6,.katex .sizing.reset-size7.size6{font-size:.83333333em}.katex .fontsize-ensurer.reset-size7.size7,.katex .sizing.reset-size7.size7{font-size:1em}.katex .fontsize-ensurer.reset-size7.size8,.katex .sizing.reset-size7.size8{font-size:1.2em}.katex .fontsize-ensurer.reset-size7.size9,.katex .sizing.reset-size7.size9{font-size:1.44em}.katex .fontsize-ensurer.reset-size7.size10,.katex .sizing.reset-size7.size10{font-size:1.72833333em}.katex .fontsize-ensurer.reset-size7.size11,.katex .sizing.reset-size7.size11{font-size:2.07333333em}.katex .fontsize-ensurer.reset-size8.size1,.katex .sizing.reset-size8.size1{font-size:.34722222em}.katex .fontsize-ensurer.reset-size8.size2,.katex .sizing.reset-size8.size2{font-size:.41666667em}.katex .fontsize-ensurer.reset-size8.size3,.katex .sizing.reset-size8.size3{font-size:.48611111em}.katex .fontsize-ensurer.reset-size8.size4,.katex .sizing.reset-size8.size4{font-size:.55555556em}.katex .fontsize-ensurer.reset-size8.size5,.katex .sizing.reset-size8.size5{font-size:.625em}.katex .fontsize-ensurer.reset-size8.size6,.katex .sizing.reset-size8.size6{font-size:.69444444em}.katex .fontsize-ensurer.reset-size8.size7,.katex .sizing.reset-size8.size7{font-size:.83333333em}.katex .fontsize-ensurer.reset-size8.size8,.katex .sizing.reset-size8.size8{font-size:1em}.katex .fontsize-ensurer.reset-size8.size9,.katex .sizing.reset-size8.size9{font-size:1.2em}.katex .fontsize-ensurer.reset-size8.size10,.katex .sizing.reset-size8.size10{font-size:1.44027778em}.katex .fontsize-ensurer.reset-size8.size11,.katex .sizing.reset-size8.size11{font-size:1.72777778em}.katex .fontsize-ensurer.reset-size9.size1,.katex .sizing.reset-size9.size1{font-size:.28935185em}.katex .fontsize-ensurer.reset-size9.size2,.katex .sizing.reset-size9.size2{font-size:.34722222em}.katex .fontsize-ensurer.reset-size9.size3,.katex .sizing.reset-size9.size3{font-size:.40509259em}.katex .fontsize-ensurer.reset-size9.size4,.katex .sizing.reset-size9.size4{font-size:.46296296em}.katex .fontsize-ensurer.reset-size9.size5,.katex .sizing.reset-size9.size5{font-size:.52083333em}.katex .fontsize-ensurer.reset-size9.size6,.katex .sizing.reset-size9.size6{font-size:.5787037em}.katex .fontsize-ensurer.reset-size9.size7,.katex .sizing.reset-size9.size7{font-size:.69444444em}.katex .fontsize-ensurer.reset-size9.size8,.katex .sizing.reset-size9.size8{font-size:.83333333em}.katex .fontsize-ensurer.reset-size9.size9,.katex .sizing.reset-size9.size9{font-size:1em}.katex .fontsize-ensurer.reset-size9.size10,.katex .sizing.reset-size9.size10{font-size:1.20023148em}.katex .fontsize-ensurer.reset-size9.size11,.katex .sizing.reset-size9.size11{font-size:1.43981481em}.katex .fontsize-ensurer.reset-size10.size1,.katex .sizing.reset-size10.size1{font-size:.24108004em}.katex .fontsize-ensurer.reset-size10.size2,.katex .sizing.reset-size10.size2{font-size:.28929605em}.katex .fontsize-ensurer.reset-size10.size3,.katex .sizing.reset-size10.size3{font-size:.33751205em}.katex .fontsize-ensurer.reset-size10.size4,.katex .sizing.reset-size10.size4{font-size:.38572806em}.katex .fontsize-ensurer.reset-size10.size5,.katex .sizing.reset-size10.size5{font-size:.43394407em}.katex .fontsize-ensurer.reset-size10.size6,.katex .sizing.reset-size10.size6{font-size:.48216008em}.katex .fontsize-ensurer.reset-size10.size7,.katex .sizing.reset-size10.size7{font-size:.57859209em}.katex .fontsize-ensurer.reset-size10.size8,.katex .sizing.reset-size10.size8{font-size:.69431051em}.katex .fontsize-ensurer.reset-size10.size9,.katex .sizing.reset-size10.size9{font-size:.83317261em}.katex .fontsize-ensurer.reset-size10.size10,.katex .sizing.reset-size10.size10{font-size:1em}.katex .fontsize-ensurer.reset-size10.size11,.katex .sizing.reset-size10.size11{font-size:1.19961427em}.katex .fontsize-ensurer.reset-size11.size1,.katex .sizing.reset-size11.size1{font-size:.20096463em}.katex .fontsize-ensurer.reset-size11.size2,.katex .sizing.reset-size11.size2{font-size:.24115756em}.katex .fontsize-ensurer.reset-size11.size3,.katex .sizing.reset-size11.size3{font-size:.28135048em}.katex .fontsize-ensurer.reset-size11.size4,.katex .sizing.reset-size11.size4{font-size:.32154341em}.katex .fontsize-ensurer.reset-size11.size5,.katex .sizing.reset-size11.size5{font-size:.36173633em}.katex .fontsize-ensurer.reset-size11.size6,.katex .sizing.reset-size11.size6{font-size:.40192926em}.katex .fontsize-ensurer.reset-size11.size7,.katex .sizing.reset-size11.size7{font-size:.48231511em}.katex .fontsize-ensurer.reset-size11.size8,.katex .sizing.reset-size11.size8{font-size:.57877814em}.katex .fontsize-ensurer.reset-size11.size9,.katex .sizing.reset-size11.size9{font-size:.69453376em}.katex .fontsize-ensurer.reset-size11.size10,.katex .sizing.reset-size11.size10{font-size:.83360129em}.katex .fontsize-ensurer.reset-size11.size11,.katex .sizing.reset-size11.size11{font-size:1em}.katex .delimsizing.size1{font-family:KaTeX_Size1}.katex .delimsizing.size2{font-family:KaTeX_Size2}.katex .delimsizing.size3{font-family:KaTeX_Size3}.katex .delimsizing.size4{font-family:KaTeX_Size4}.katex .delimsizing.mult .delim-size1>span{font-family:KaTeX_Size1}.katex .delimsizing.mult .delim-size4>span{font-family:KaTeX_Size4}.katex .nulldelimiter{display:inline-block;width:.12em}.katex .delimcenter,.katex .op-symbol{position:relative}.katex .op-symbol.small-op{font-family:KaTeX_Size1}.katex .op-symbol.large-op{font-family:KaTeX_Size2}.katex .accent>.vlist-t,.katex .op-limits>.vlist-t{text-align:center}.katex .accent .accent-body{position:relative}.katex .accent .accent-body:not(.accent-full){width:0}.katex .overlay{display:block}.katex .mtable .vertical-separator{display:inline-block;min-width:1px}.katex .mtable .arraycolsep{display:inline-block}.katex .mtable .col-align-c>.vlist-t{text-align:center}.katex .mtable .col-align-l>.vlist-t{text-align:left}.katex .mtable .col-align-r>.vlist-t{text-align:right}.katex .svg-align{text-align:left}.katex svg{display:block;position:absolute;width:100%;height:inherit;fill:currentColor;stroke:currentColor;fill-rule:nonzero;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1}.katex svg path{stroke:none}.katex img{border-style:none;min-width:0;min-height:0;max-width:none;max-height:none}.katex .stretchy{width:100%;display:block;position:relative;overflow:hidden}.katex .stretchy:after,.katex .stretchy:before{content:""}.katex .hide-tail{width:100%;position:relative;overflow:hidden}.katex .halfarrow-left{position:absolute;left:0;width:50.2%;overflow:hidden}.katex .halfarrow-right{position:absolute;right:0;width:50.2%;overflow:hidden}.katex .brace-left{position:absolute;left:0;width:25.1%;overflow:hidden}.katex .brace-center{position:absolute;left:25%;width:50%;overflow:hidden}.katex .brace-right{position:absolute;right:0;width:25.1%;overflow:hidden}.katex .x-arrow-pad{padding:0 .5em}.katex .cd-arrow-pad{padding:0 .55556em 0 .27778em}.katex .mover,.katex .munder,.katex .x-arrow{text-align:center}.katex .boxpad{padding:0 .3em}.katex .fbox,.katex .fcolorbox{box-sizing:border-box;border:.04em solid}.katex .cancel-pad{padding:0 .2em}.katex .cancel-lap{margin-left:-.2em;margin-right:-.2em}.katex .sout{border-bottom-style:solid;border-bottom-width:.08em}.katex .angl{box-sizing:border-content;border-top:.049em solid;border-right:.049em solid;margin-right:.03889em}.katex .anglpad{padding:0 .03889em}.katex .eqn-num:before{counter-increment:katexEqnNo;content:"(" counter(katexEqnNo) ")"}.katex .mml-eqn-num:before{counter-increment:mmlEqnNo;content:"(" counter(mmlEqnNo) ")"}.katex .mtr-glue{width:50%}.katex .cd-vert-arrow{display:inline-block;position:relative}.katex .cd-label-left{display:inline-block;position:absolute;right:calc(50% + .3em);text-align:left}.katex .cd-label-right{display:inline-block;position:absolute;left:calc(50% + .3em);text-align:right}.katex-display{display:block;margin:1em 0;text-align:center}.katex-display>.katex{display:block;text-align:center;white-space:nowrap}.katex-display>.katex>.katex-html{display:block;position:relative}.katex-display>.katex>.katex-html>.tag{position:absolute;right:0}.katex-display.leqno>.katex>.katex-html>.tag{left:0;right:auto}.katex-display.fleqn>.katex{text-align:left;padding-left:2em}body{counter-reset:katexEqnNo mmlEqnNo}
+
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.katex-error {
+	color: var(--vscode-editorError-foreground);
+}
+
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h1 id="api-trigger">API: Trigger</h1>
+<h3 id="parameters-for-a-trigger">Parameters for a trigger</h3>
+<h3 id="ver-10">Ver 1.0</h3>
+<hr>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#select">SELECT</a>
+<ul>
+<li><a href="#select-request">REQUEST</a></li>
+<li><a href="#select-request-filtered">REQUEST (FILTERED)</a></li>
+<li><a href="#select-response-success">RESPONSE (SUCCESS)</a></li>
+<li><a href="#select-response-failure">RESPONSE (FAILURE)</a></li>
+</ul>
+</li>
+<li><a href="#insert">INSERT</a>
+<ul>
+<li><a href="#insert-request">REQUEST</a></li>
+<li><a href="#insert-response-success">RESPONSE (SUCCESS)</a></li>
+<li><a href="#insert-response-failure">RESPONSE (FAILURE)</a></li>
+</ul>
+</li>
+<li><a href="#update">UPDATE</a>
+<ul>
+<li><a href="#update-request">REQUEST</a></li>
+<li><a href="#update-response-success">RESPONSE (SUCCESS)</a></li>
+<li><a href="#update-response-failure">RESPONSE (FAILURE)</a></li>
+</ul>
+</li>
+</ul>
+<br>
+<hr>
+<hr>
+<br>
+<h1 id="select">SELECT</h1>
+<p>Standard request to select trigger(s), either all available or a filtered selection.</p>
+<h2 id="select-request">SELECT REQUEST</h2>
+<p>A GET request to the server will return all triggers associated with the user. Responses are limited to a maximum 1000 responses by default.</p>
+<pre><code class="language-json"><div>GET /v1/Trigger/ HTTP/<span class="hljs-number">1.1</span>
+</div></code></pre>
+<h2 id="select-request-filtered">SELECT REQUEST (FILTERED)</h2>
+<p>Include optional fields to filter results. If no optional field is supplied, ie. the only query field is &quot;action&quot; : &quot;select&quot;, then all triggers associated with the user will be returned.</p>
+<pre><code class="language-json"><div>POST /v1/Trigger/ HTTP/<span class="hljs-number">1.1</span>
+
+    <span class="hljs-comment">//  Request values</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;select&quot;</span>
+    , <span class="hljs-attr">&quot;device_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;asset_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;deviceasset_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;device_sn&quot;</span> : STRING | ARRAY
+    , <span class="hljs-attr">&quot;span&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;trigger_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;trigger_level&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;sd_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;geofence_id&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;trigger_source&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;duration&quot;</span> : INT | ARRAY
+    , <span class="hljs-attr">&quot;device_alarm&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;site_alarm&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;reaction&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;active_status&quot;</span> : INT 
+    , <span class="hljs-attr">&quot;limit&quot;</span> : INT 
+}
+    <span class="hljs-comment">//  Example</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;select&quot;</span>
+    , <span class="hljs-attr">&quot;deviceasset_id&quot;</span> : 
+        [
+            <span class="hljs-number">1</span>
+            , <span class="hljs-number">2</span>
+        ]
+    , <span class="hljs-attr">&quot;duration&quot;</span> : <span class="hljs-number">0</span>
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span> : <span class="hljs-number">1</span>
+}
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>PARAMETER</th>
+<th>REQ/OPT</th>
+<th>TYPE</th>
+<th>ACCEPTED VALUES</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action</td>
+<td><strong>Required</strong></td>
+<td>STRING</td>
+<td>&quot;select&quot;</td>
+<td>Request action</td>
+</tr>
+<tr>
+<td>device_id</td>
+<td><em>Conditional</em></td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Triggers associated with this device ID <br> If <em>span</em> parameter included mandatory to include at least one of <em>device_id</em>, <em>device_sn</em>, <em>asset_id</em> or <em>deviceasset_id</em></td>
+</tr>
+<tr>
+<td>asset_id</td>
+<td><em>Conditional</em></td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Triggers associated with this asset ID <br> If <em>span</em> parameter included mandatory to include at least one of <em>device_id</em>, <em>device_sn</em>, <em>asset_id</em> or <em>deviceasset_id</em></td>
+</tr>
+<tr>
+<td>deviceasset_id</td>
+<td><em>Conditional</em></td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Triggers associated with this deviceasset ID <br> If <em>span</em> parameter included mandatory to include at least one of <em>device_id</em>, <em>device_sn</em>, <em>asset_id</em> or <em>deviceasset_id</em> <br></td>
+</tr>
+<tr>
+<td>device_sn</td>
+<td><em>Conditional</em></td>
+<td>STRING | ARRAY</td>
+<td>Length &lt;= 45, or <br> ARRAY of Length &lt;= 45</td>
+<td>Triggers associated with this device serial number <br> If <em>span</em> parameter included mandatory to include at least one of <em>device_id</em>, <em>device_sn</em>, <em>asset_id</em> or <em>deviceasset_id</em> <br></td>
+</tr>
+<tr>
+<td>span</td>
+<td><em>Conditional</em></td>
+<td>STRING</td>
+<td>Length &lt;= 9</td>
+<td>Select current triggers, previously used or all available for selected <em>device_id</em>, <em>asset_id</em> and/or <em>deviceasset_id</em> <br> Accepted values: &quot;Current&quot;, &quot;Previous&quot; or &quot;Available&quot; <br> Defaults to &quot;Current&quot; if not specified and at least one of <em>device_id</em>, <em>asset_id</em> or <em>deviceasset_id</em> included</td>
+</tr>
+<tr>
+<td>trigger_id</td>
+<td>Optional</td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Trigger ID</td>
+</tr>
+<tr>
+<td>trigger_type</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 8</td>
+<td>Trigger type <br> Either (0) &quot;Critical&quot; or (1) &quot;Warning&quot;</td>
+</tr>
+<tr>
+<td>trigger_level</td>
+<td>Optional</td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Trigger level severity value</td>
+</tr>
+<tr>
+<td>sd_id</td>
+<td>Optional</td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Sensor definition ID</td>
+</tr>
+<tr>
+<td>geofence_id</td>
+<td>Optional</td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Geofence ID</td>
+</tr>
+<tr>
+<td>trigger_source</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 8</td>
+<td>Trigger source <br> Either (0) &quot;Geofence&quot; or (1) &quot;Sensor&quot;</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>Optional</td>
+<td>INT | ARRAY</td>
+<td>[0.. ∞), or <br> ARRAY of [0.. ∞)</td>
+<td>Duration (seconds) the sensor value must satisfy the trigger condition for the trigger to occur</td>
+</tr>
+<tr>
+<td>device_alarm</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Device alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>site_alarm</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Site alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>reaction</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 11</td>
+<td>Reaction required on trigger occur <br> Either (0) &quot;Acknowledge&quot; or (1) &quot;Action&quot;</td>
+</tr>
+<tr>
+<td>active_status</td>
+<td>Optional</td>
+<td>INT</td>
+<td>[0.. 1]</td>
+<td>Trigger is either active (0) or inactive (1)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Optional</td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Response limit <br> Default 1000 responses</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="select-response-success">SELECT RESPONSE (SUCCESS)</h2>
+<p>Response success returns all information for the selected trigger(s).</p>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+{
+    <span class="hljs-attr">&quot;triggers&quot;</span>: {
+            <span class="hljs-comment">//  Response values</span>
+        <span class="hljs-attr">&quot;triggers 1&quot;</span>: {
+            <span class="hljs-attr">&quot;trigger_id&quot;</span>: INT,
+            <span class="hljs-attr">&quot;trigger_name&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;trigger_type&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;trigger_level&quot;</span>: INT,
+            <span class="hljs-attr">&quot;trigger_source&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;sd_id&quot;</span>: INT | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;geofence_id&quot;</span>: INT | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;value_operator&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;trigger_value&quot;</span>: INT | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;duration&quot;</span>: INT,
+            <span class="hljs-attr">&quot;device_alarm&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;site_alarm&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;trigger_email&quot;</span>: STRING | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;trigger_sms&quot;</span>: STRING | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;trigger_phone&quot;</span>: STRING | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;trigger_fax&quot;</span>: STRING | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;suggested_actions&quot;</span>: STRING | <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;reaction&quot;</span>: STRING,
+            <span class="hljs-attr">&quot;active_status&quot;</span>: INT,
+            <span class="hljs-attr">&quot;last_modified_by&quot;</span>: INT,
+            <span class="hljs-attr">&quot;last_modified_datetime&quot;</span>: DATETIME
+        },
+            <span class="hljs-comment">//  Example</span>
+        <span class="hljs-attr">&quot;triggers 1&quot;</span>: {
+            <span class="hljs-attr">&quot;trigger_id&quot;</span>: <span class="hljs-number">3</span>,
+            <span class="hljs-attr">&quot;trigger_name&quot;</span>: <span class="hljs-string">&quot;accelerometer g&quot;</span>,
+            <span class="hljs-attr">&quot;trigger_type&quot;</span>: <span class="hljs-string">&quot;Warning&quot;</span>,
+            <span class="hljs-attr">&quot;trigger_level&quot;</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">&quot;trigger_source&quot;</span>: <span class="hljs-string">&quot;Sensor&quot;</span>,
+            <span class="hljs-attr">&quot;sd_id&quot;</span>: <span class="hljs-number">8</span>,
+            <span class="hljs-attr">&quot;geofence_id&quot;</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;value_operator&quot;</span>: <span class="hljs-string">&quot;&gt;=&quot;</span>,
+            <span class="hljs-attr">&quot;trigger_value&quot;</span>: <span class="hljs-number">7</span>,
+            <span class="hljs-attr">&quot;duration&quot;</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">&quot;device_alarm&quot;</span>: <span class="hljs-string">&quot;On&quot;</span>,
+            <span class="hljs-attr">&quot;site_alarm&quot;</span>: <span class="hljs-string">&quot;Off&quot;</span>,
+            <span class="hljs-attr">&quot;trigger_email&quot;</span>: <span class="hljs-string">&quot;admin@usm.net.au&quot;</span>,
+            <span class="hljs-attr">&quot;trigger_sms&quot;</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;trigger_phone&quot;</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;trigger_fax&quot;</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;suggested_actions&quot;</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">&quot;reaction&quot;</span>: <span class="hljs-string">&quot;Acknowledge&quot;</span>,
+            <span class="hljs-attr">&quot;active_status&quot;</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">&quot;last_modified_by&quot;</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">&quot;last_modified_datetime&quot;</span>: <span class="hljs-string">&quot;2021-08-11 00:11:52&quot;</span>
+        },
+        ...
+    }
+}
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>PARAMETER</th>
+<th>TYPE</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trigger_id</td>
+<td>INT</td>
+<td>Trigger ID</td>
+</tr>
+<tr>
+<td>trigger_name</td>
+<td>STRING</td>
+<td>Trigger name</td>
+</tr>
+<tr>
+<td>trigger_type</td>
+<td>STRING</td>
+<td>Trigger type <br> Either &quot;Warning&quot; or &quot;Critical&quot;</td>
+</tr>
+<tr>
+<td>trigger_level</td>
+<td>INT</td>
+<td>Trigger level</td>
+</tr>
+<tr>
+<td>trigger_source</td>
+<td>STRING</td>
+<td>Trigger source <br> Either &quot;Sensor&quot; or &quot;Geofence&quot;</td>
+</tr>
+<tr>
+<td>sd_id</td>
+<td>INT | NULL</td>
+<td>Sensor ID associataed with trigger <br> NULL if <em>geofence_id</em> is not null</td>
+</tr>
+<tr>
+<td>geofence_id</td>
+<td>INT | NULL</td>
+<td>Geofence ID associated with trigger <br> NULL if <em>sd_id</em> or <em>trigger_value</em> are not null</td>
+</tr>
+<tr>
+<td>value_operator</td>
+<td>STRING</td>
+<td>Comparison value used to compare a value against <em>trigger_value</em> <br> Either &quot;&gt;&quot;, &quot;&lt;&quot;, &quot;&gt;=&quot;, &quot;&lt;=&quot;, &quot;=&quot;, &quot;Exit&quot; or &quot;Entry&quot;</td>
+</tr>
+<tr>
+<td>trigger_value</td>
+<td>INT | NULL</td>
+<td>Value to compare sensor data against using <em>value_operator</em> <br> NULL if <em>geofence_id</em> is not null</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>INT</td>
+<td>Duration (seconds) that a sensor value must satisfy the trigger condition for a trigger to occur <br> Duration of 0 indicates an immediate trigger occurance <br> If <em>trigger_source</em> is &quot;Geofence&quot; the duration is always 0</td>
+</tr>
+<tr>
+<td>device_alarm</td>
+<td>STRING</td>
+<td>Device alarm state if the trigger occurs <br> Either &quot;Off&quot; or &quot;On&quot;</td>
+</tr>
+<tr>
+<td>site_alarm</td>
+<td>STRING</td>
+<td>Site alarm state if the trigger occurs <br> Either &quot;Off&quot; or &quot;On&quot;</td>
+</tr>
+<tr>
+<td>trigger_email</td>
+<td>STRING | NULL</td>
+<td>Email address associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_sms</td>
+<td>STRING | NULL</td>
+<td>SMS number associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_phone</td>
+<td>STRING | NULL</td>
+<td>Phone number associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_fax</td>
+<td>STRING | NULL</td>
+<td>Fax number associated with this trigger</td>
+</tr>
+<tr>
+<td>suggested_actions</td>
+<td>STRING | NULL</td>
+<td>Suggested action if this trigger occurs</td>
+</tr>
+<tr>
+<td>reaction</td>
+<td>STRING</td>
+<td>Reaction required if this trigger occurs <br> Either &quot;Acknowledge&quot; or &quot;Action&quot;</td>
+</tr>
+<tr>
+<td>active_status</td>
+<td>INT</td>
+<td>Trigger is either active (0) or inactive (1)</td>
+</tr>
+<tr>
+<td>last_modified_by</td>
+<td>INT</td>
+<td>User ID code that last modified the trigger</td>
+</tr>
+<tr>
+<td>last_modified_datetime</td>
+<td>DATETIME</td>
+<td>Timestamp of last trigger modification</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="select-response-failure">SELECT RESPONSE (FAILURE)</h2>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+    <span class="hljs-comment">//  Error value</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : ERROR_CODE
+}
+    <span class="hljs-comment">//  Example error</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : <span class="hljs-string">&quot;NO_DATA&quot;</span>
+}
+
+</div></code></pre>
+<br> 
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Explanation</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INVALID_TOKEN</td>
+<td>1. Token has timed out, or <br> 2. Token is invalid</td>
+<td>Provide a new token</td>
+</tr>
+<tr>
+<td>INVALID_REQUEST_PRAM</td>
+<td>1. &quot;action&quot; parameter is missing, or <br> 2. incorrect JSON format</td>
+<td>1. Include required parameter, or <br> 2. check request JSON for incorrect data</td>
+</tr>
+<tr>
+<td>INVALID_ACTION_PRAM</td>
+<td>&quot;action&quot; parameter is not select, update or insert</td>
+<td>Alter parameter to &quot;select&quot;</td>
+</tr>
+<tr>
+<td>INVALID_INPUT_PRAM</td>
+<td>Input parameter does not exist or is spelt incorrectly</td>
+<td>Remove parameter or alter parameter to correct spelling. <br> This error is accompanied with subsequent message &quot;error_detail: INVALID_PRAM_X&quot;, where X is the first occuring invalid parameter</td>
+</tr>
+<tr>
+<td>NO_DATA</td>
+<td>No data for user exists that could be returned</td>
+<td>Change login or change request parameters</td>
+</tr>
+<tr>
+<td>MISSING_IDENTIFICATION_PRAM</td>
+<td>Missing mandatory parameter <br> If <em>span</em> parameter is used it is mandatory to include at least one of <em>device_id</em>, <em>device_sn</em>, <em>asset_id</em> or <em>deviceasset_id</em></td>
+<td>Include at least one mandatory parameter</td>
+</tr>
+<tr>
+<td>INVALID_DEVICE_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DEVICE_SN_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_ASSET_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DEVICEASSET_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SPAN_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_TYPE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_LEVEL_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SD_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_GEOFENCE_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_SOURCE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DURATION_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DEVICE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SITE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_REACTION_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_ACTIVE_STATUS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_LIMIT_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+</tbody>
+</table>
+<br>
+<hr>
+<hr>
+<br>
+<h1 id="insert">INSERT</h1>
+<p>Request to insert a new trigger</p>
+<h2 id="insert-request">INSERT REQUEST</h2>
+<pre><code class="language-json"><div>POST /v1/Trigger/ HTTP/<span class="hljs-number">1.1</span>
+
+    <span class="hljs-comment">//  Request values</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;insert&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_name&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;trigger_level&quot;</span> : INT
+    , <span class="hljs-attr">&quot;sd_id&quot;</span> : INT
+    , <span class="hljs-attr">&quot;trigger_value&quot;</span> : INT
+    , <span class="hljs-attr">&quot;geofence_id&quot;</span> : INT
+    , <span class="hljs-attr">&quot;value_operator&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;duration&quot;</span> : INT
+    , <span class="hljs-attr">&quot;device_alarm&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;site_alarm&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;trigger_email&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;trigger_sms&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;trigger_phone&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;trigger_fax&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;suggested_actions&quot;</span> : STRING
+    , <span class="hljs-attr">&quot;reaction&quot;</span> : INT | STRING
+    , <span class="hljs-attr">&quot;active_status&quot;</span> : INT   
+}
+    <span class="hljs-comment">//  Example</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;insert&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_name&quot;</span> : <span class="hljs-string">&quot;Temperature above 5C&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span> : <span class="hljs-number">1</span>
+    , <span class="hljs-attr">&quot;sd_id&quot;</span> : <span class="hljs-number">9</span>
+    , <span class="hljs-attr">&quot;trigger_value&quot;</span> : <span class="hljs-number">5</span>
+    , <span class="hljs-attr">&quot;value_operator&quot;</span> : <span class="hljs-string">&quot;&gt;&quot;</span>
+    , <span class="hljs-attr">&quot;duration&quot;</span> : <span class="hljs-number">30</span>
+    , <span class="hljs-attr">&quot;device_alarm&quot;</span> : <span class="hljs-number">1</span>
+    , <span class="hljs-attr">&quot;site_alarm&quot;</span> : <span class="hljs-number">0</span>
+    , <span class="hljs-attr">&quot;trigger_email&quot;</span>: <span class="hljs-string">&quot;alerts@fridgeCompany.com&quot;</span>
+    , <span class="hljs-attr">&quot;reaction&quot;</span> : <span class="hljs-number">0</span>
+    , <span class="hljs-attr">&quot;suggested_actions&quot;</span> : <span class="hljs-string">&quot;Log. Check fridge in person for issues&quot;</span>
+    , <span class="hljs-attr">&quot;active_status&quot;</span> : <span class="hljs-number">0</span>
+}
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>PARAMETER</th>
+<th>REQ/OPT</th>
+<th>TYPE</th>
+<th>ACCEPTED VALUES</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>trigger_name</td>
+<td><strong>Required</strong></td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger name</td>
+</tr>
+<tr>
+<td>trigger_type</td>
+<td><strong>Required</strong></td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 8</td>
+<td>Trigger type <br> Either (0) &quot;Critical&quot; or (1) &quot;Warning&quot;</td>
+</tr>
+<tr>
+<td>trigger_level</td>
+<td><strong>Required</strong></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Trigger level severity value</td>
+</tr>
+<tr>
+<td>sd_id</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Sensor definition ID <br> Mandatory to have either <em>sd_id</em> or <em>geofence_id</em> <br> Incompatable with <em>geofence_id</em> <br> Mandatory if <em>trigger_value</em> also included</td>
+</tr>
+<tr>
+<td>trigger_value</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>(-∞, ∞)</td>
+<td>Trigger value to compare values against with <em>value_operator</em> <br> Mandatory if <em>sd_id</em> also included <br> If also including <em>sd_id</em> parameter then <em>trigger_value</em> must be a value inclusively within the <em>sd_id</em> data min - data max range  <br> Incompatable with <em>geofence_id</em></td>
+</tr>
+<tr>
+<td>geofence_id</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Geofence ID <br> Mandatory to have either <em>sd_id</em> or <em>geofence_id</em> <br> Incompatable with <em>sd_id</em> and <em>trigger_value</em></td>
+</tr>
+<tr>
+<td>value_operator</td>
+<td><strong>Required</strong></td>
+<td>STRING</td>
+<td>Length &lt;= 5</td>
+<td>Value comparison operator <br> See <a href="#value-operator">notes</a> <br> If also including <em>sd_id</em>, accepted values: &quot;&gt;&quot;, &quot;&lt;&quot;, &quot;&gt;=&quot;, &quot;&lt;=&quot; or &quot;=&quot; <br> If also including <em>geofence_id</em>, accepted values: &quot;Exit&quot; or &quot;Entry&quot;</td>
+</tr>
+<tr>
+<td>duration</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Duration (seconds) a value must satisfy the trigger condition before the trigger occurs <br> Mandatory if also including <em>sd_id</em> and <em>trigger_value</em> parameters <br> If also including <em>geofence_id</em> parameter <em>duration</em> defaults to &quot;0&quot;, and must be &quot;0&quot; if explicitly included</td>
+</tr>
+<tr>
+<td>device_alarm</td>
+<td><strong>Required</strong></td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Device alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>site_alarm</td>
+<td><strong>Required</strong></td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Site alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>trigger_email</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Email associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_sms</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>SMS number associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_phone</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Phone number associated with this trigger</td>
+</tr>
+<tr>
+<td>trigger_fax</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Fax number associated with this trigger</td>
+</tr>
+<tr>
+<td>suggested_actions</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 1000</td>
+<td>Suggested action <br> Defaults to NULL if not included</td>
+</tr>
+<tr>
+<td>reaction</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 11</td>
+<td>Reaction required on trigger occur <br> Either (0) &quot;Acknowledge&quot; or (1) &quot;Action&quot; <br> Defaults to NULL if not included</td>
+</tr>
+<tr>
+<td>active_status</td>
+<td><strong>Required</strong></td>
+<td>INT</td>
+<td>[0.. 1]</td>
+<td>Trigger is either active (0) or inactive (1)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="notes">Notes</h2>
+<h3 id="value-operator"><strong>Value Operator</strong></h3>
+<p>Value comparison operator. Used with sensor values to compare a value against <em>trigger_value</em> to determine if a trigger occurs. Used with geofence triggers to define trigger on &quot;Entry&quot; or &quot;Exit&quot;</p>
+<p>Format for &quot;Sensor&quot; triggers is:
+sensor value <em>value_operator</em> <em>trigger_value</em></p>
+<pre><code class="language-json"><div><span class="hljs-comment">//  Example values</span>
+    sensor value : <span class="hljs-number">10</span>    
+    value_operator : <span class="hljs-string">&quot;&gt;&quot;</span>
+    trigger_value : <span class="hljs-number">15</span>
+
+<span class="hljs-comment">//  Resulting check</span>
+    <span class="hljs-number">10</span> &gt; <span class="hljs-number">15</span> 
+
+<span class="hljs-comment">//  Sensor value 10 is not greater than trigger value 15, so no trigger occurs    </span>
+</div></code></pre>
+<br>
+<h2 id="insert-response-success">INSERT RESPONSE (SUCCESS)</h2>
+<p>Response success returns the inserted trigger information, as well as the generated <em>trigger_id</em> and an error: NO_ERROR code</p>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+    <span class="hljs-comment">//  Response values</span>
+{
+    <span class="hljs-attr">&quot;trigger_name&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_type&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_level&quot;</span>: INT,
+    <span class="hljs-attr">&quot;trigger_source&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;sd_id&quot;</span>: INT,
+    <span class="hljs-attr">&quot;trigger_value&quot;</span>: INT,
+    <span class="hljs-attr">&quot;geofence_id&quot;</span> : INT,
+    <span class="hljs-attr">&quot;value_operator&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;duration&quot;</span>: INT,
+    <span class="hljs-attr">&quot;device_alarm&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;site_alarm&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_email&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_sms&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_phone&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_fax&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;suggested_actions&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;reaction&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;active_status&quot;</span>: INT,
+    <span class="hljs-attr">&quot;trigger_id&quot;</span> : INT,                  <span class="hljs-comment">//  Generated PARAMETER</span>
+    <span class="hljs-attr">&quot;error&quot;</span> : <span class="hljs-string">&quot;NO_ERROR&quot;</span>                 <span class="hljs-comment">//  Error code</span>
+}
+    <span class="hljs-comment">//  Example response</span>
+{
+    <span class="hljs-attr">&quot;trigger_name&quot;</span>: <span class="hljs-string">&quot;Temperature above 5C&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_type&quot;</span>: <span class="hljs-string">&quot;Warning&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_level&quot;</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">&quot;trigger_source&quot;</span>: <span class="hljs-string">&quot;Sensor&quot;</span>,
+    <span class="hljs-attr">&quot;sd_id&quot;</span>: <span class="hljs-string">&quot;9&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_value&quot;</span>: <span class="hljs-string">&quot;5&quot;</span>,
+    <span class="hljs-attr">&quot;value_operator&quot;</span>: <span class="hljs-string">&quot;&gt;&quot;</span>,
+    <span class="hljs-attr">&quot;duration&quot;</span>: <span class="hljs-string">&quot;30&quot;</span>,
+    <span class="hljs-attr">&quot;device_alarm&quot;</span>: <span class="hljs-string">&quot;On&quot;</span>,
+    <span class="hljs-attr">&quot;site_alarm&quot;</span>: <span class="hljs-string">&quot;Off&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_email&quot;</span>: <span class="hljs-string">&quot;alerts@fridgeCompany.com&quot;</span>,
+    <span class="hljs-attr">&quot;suggested_actions&quot;</span>: <span class="hljs-string">&quot;Log. Check fridge in person for issues&quot;</span>,
+    <span class="hljs-attr">&quot;reaction&quot;</span>: <span class="hljs-string">&quot;Acknowledge&quot;</span>,
+    <span class="hljs-attr">&quot;active_status&quot;</span>: <span class="hljs-string">&quot;0&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_id&quot;</span>: <span class="hljs-string">&quot;17&quot;</span>,                  <span class="hljs-comment">//  Generated PARAMETER</span>
+    <span class="hljs-attr">&quot;error&quot;</span> : <span class="hljs-string">&quot;NO_ERROR&quot;</span>                 <span class="hljs-comment">//  Error code</span>
+}
+</div></code></pre>
+<br>
+<h2 id="insert-response-failure">INSERT RESPONSE (FAILURE)</h2>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+    <span class="hljs-comment">//  Error value</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : ERROR_CODE
+}
+    <span class="hljs-comment">//  Example error</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : <span class="hljs-string">&quot;INVALID_TOKEN&quot;</span>
+}
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Explanation</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INVALID_TOKEN</td>
+<td>1. Token has timed out, or <br> 2. Token is invalid</td>
+<td>Provide a new token</td>
+</tr>
+<tr>
+<td>INVALID_REQUEST_PRAM</td>
+<td>1. &quot;action&quot; parameter is missing, or <br> 2. incorrect JSON format</td>
+<td>1. Include required parameter, or <br> 2. check request JSON for incorrect data</td>
+</tr>
+<tr>
+<td>INVALID_ACTION_PRAM</td>
+<td>&quot;action&quot; parameter is not select, update or insert</td>
+<td>Alter parameter to &quot;insert&quot;</td>
+</tr>
+<tr>
+<td>INVALID_INPUT_PRAM</td>
+<td>Input parameter does not exist or is spelt incorrectly</td>
+<td>Remove parameter or alter parameter to correct spelling. <br> This error is accompanied with subsequent message &quot;error_detail: INVALID_PRAM_X&quot;, where X is the first occuring invalid parameter</td>
+</tr>
+<tr>
+<td>MISSING_SD_ID_OR_GEOFENCE_ID_PRAM</td>
+<td>Insert request requires either <em>sd_id</em> or <em>geofence_id</em> parameters</td>
+<td>Include either required parameter in query</td>
+</tr>
+<tr>
+<td>INVALID_INCOMPATABLE_SD_ID_AND_GEOFENCE_ID_PRAM</td>
+<td>Insert request must have only one of <em>sd_id</em> or <em>geofence_id</em> parameters</td>
+<td>Include only one required parameter in query</td>
+</tr>
+<tr>
+<td>INVALID_INCOMPATABLE_SD_ID_AND_VALUE_OPERATOR_PRAM</td>
+<td><em>sd_id</em> is not compatable with value operators &quot;Exit&quot; and &quot;Entry&quot;</td>
+<td>Alter parameters to a valid value</td>
+</tr>
+<tr>
+<td>INVALID_INCOMPATABLE_GEOFENCE_AND_VALUE_OPERATOR_PRAM</td>
+<td><em>geofence_id</em> is not compatable with value operators that are NOT &quot;Exit&quot; and &quot;Entry&quot;</td>
+<td>Alter parameters to a valid value</td>
+</tr>
+<tr>
+<td>INVALID_INCOMPATABLE_GEOFENCE_AND_TRIGGER_VALUE_PRAM</td>
+<td><em>geofence_id</em> is not compatable with <em>trigger_value</em></td>
+<td>Remove <em>trigger_value</em> parameter</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_VALUE_RANGE_PRAM</td>
+<td>Trigger value is not within the <em>sd_id</em> data min - data max range</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>GEOFENCE_LOCKED</td>
+<td>Geofence is locked. New triggers cannot be attributed to this geofence</td>
+<td>No action necessary</td>
+</tr>
+<tr>
+<td>MISSING_TRIGGER_NAME_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_TRIGGER_TYPE_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_TRIGGER_VALUE_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_SD_ID_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_VALUE_OPERATOR_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_DURATION_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_DEVICE_ALARM_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_SITE_ALARM_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_REACTION_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_NAME_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_TYPE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_LEVEL_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SD_ID_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. <em>sd_id</em> is not a valid or active <em>sd_id</em></td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_VALUE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_GEOFENCE_ID_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. <em>geofence_id</em> is not a valid or active <em>geofence_id</em></td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_VALUE_OPERATOR_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DURATION_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. <em>duration</em> is not 0 while also using <em>geofence_id</em> parameter</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DEVICE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SITE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_EMAIL_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_SMS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_PHONE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_FAX_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SUGGESTED_ACTIONS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_REACTION_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_ACTIVE_STATUS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+</tbody>
+</table>
+<br>
+<hr>
+<hr>
+<br>
+<h1 id="update">UPDATE</h1>
+<p>Request to update an existing Trigger.</p>
+<p>If a trigger has been associated with an alarm event, then only <em>trigger_name</em> can be updated.</p>
+<p>Updating a trigger will also iterate associated devices trigger version by 1.</p>
+<h2 id="update-request">UPDATE REQUEST</h2>
+<pre><code class="language-json"><div>POST /v1/Trigger/ HTTP/<span class="hljs-number">1.1</span>
+
+    <span class="hljs-comment">//  Request values</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;update&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_id&quot;</span> : INT
+    , <span class="hljs-attr">&quot;trigger_name&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span>: INT | STRING
+    , <span class="hljs-attr">&quot;trigger_level&quot;</span>: INT
+    , <span class="hljs-attr">&quot;sd_id&quot;</span>: INT
+    , <span class="hljs-attr">&quot;trigger_value&quot;</span>: INT
+    , <span class="hljs-attr">&quot;geofence_id&quot;</span> : INT
+    , <span class="hljs-attr">&quot;value_operator&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;duration&quot;</span>: INT
+    , <span class="hljs-attr">&quot;device_alarm&quot;</span>: INT | STRING
+    , <span class="hljs-attr">&quot;site_alarm&quot;</span>: INT | STRING 
+    , <span class="hljs-attr">&quot;trigger_email&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;trigger_sms&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;trigger_phone&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;trigger_fax&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;suggested_actions&quot;</span>: STRING
+    , <span class="hljs-attr">&quot;reaction&quot;</span>: INT | STRING
+    , <span class="hljs-attr">&quot;active_status&quot;</span>: INT
+}
+    <span class="hljs-comment">//  Example</span>
+{
+    <span class="hljs-attr">&quot;action&quot;</span> : <span class="hljs-string">&quot;update&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_id&quot;</span> : <span class="hljs-number">17</span>
+    , <span class="hljs-attr">&quot;trigger_name&quot;</span> : <span class="hljs-string">&quot;Temperature above 10C&quot;</span>
+    , <span class="hljs-attr">&quot;trigger_type&quot;</span> : <span class="hljs-number">0</span>
+    , <span class="hljs-attr">&quot;trigger_value&quot;</span> : <span class="hljs-number">10</span>
+    , <span class="hljs-attr">&quot;value_operator&quot;</span> : <span class="hljs-string">&quot;&gt;&quot;</span>
+    , <span class="hljs-attr">&quot;suggested_actions&quot;</span> : <span class="hljs-string">&quot;Call supervisor immediately. Check fridges immediately&quot;</span>
+    , <span class="hljs-attr">&quot;reaction&quot;</span> : <span class="hljs-number">1</span>
+    , <span class="hljs-attr">&quot;trigger_phone&quot;</span> : <span class="hljs-string">&quot;12345678&quot;</span>
+}
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>PARAMETER</th>
+<th>REQ/OPT</th>
+<th>TYPE</th>
+<th>ACCEPTED VALUES</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>action</td>
+<td><strong>Required</strong></td>
+<td>STRING</td>
+<td>&quot;update&quot;</td>
+<td>Request action</td>
+</tr>
+<tr>
+<td>trigger_id</td>
+<td><strong>Required</strong></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Trigger ID</td>
+</tr>
+<tr>
+<td>trigger_name</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger name</td>
+</tr>
+<tr>
+<td>trigger_type</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 8</td>
+<td>Trigger type <br> Either (0) &quot;Critical&quot; or (1) &quot;Warning&quot;</td>
+</tr>
+<tr>
+<td>trigger_level</td>
+<td>Optional</td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Trigger level severity value</td>
+</tr>
+<tr>
+<td>sd_id</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Sensor definition ID <br> If not also updating <em>trigger_value</em> then the new <em>sd_id</em> data min-max range must encompass the already listed <em>trigger_value</em> <br> Mandatory if changing trigger source from &quot;Geofence&quot; to &quot;Sensor&quot; <br> Incompatable with <em>geofence_id</em></td>
+</tr>
+<tr>
+<td>trigger_value</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>(-∞, ∞)</td>
+<td>Trigger value to compare values against with <em>value_operator</em> <br> Must be a value inclusively within the data min - data max range of either the already listed <em>sd_id</em> (if not also updating), or the new <em>sd_id</em> (if also updating) <br> Mandatory if changing trigger source from &quot;Geofence&quot; to &quot;Sensor&quot; <br> Incompatable with <em>geofence_id</em></td>
+</tr>
+<tr>
+<td>geofence_id</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Geofence ID <br> Geofence must be valid and not locked <br> Mandatory if changing trigger source from &quot;Sensor&quot; to &quot;Geofence&quot; <br> Incompatable with <em>sd_id</em> and <em>trigger_value</em></td>
+</tr>
+<tr>
+<td>value_operator</td>
+<td><em>Conditional</em></td>
+<td>STRING</td>
+<td>Length &lt;= 5</td>
+<td>Value comparison operator <br> Mandatory if changing trigger source <br> If also including <em>sd_id</em> or if &quot;Sensor&quot; source trigger, accepted values: &quot;&gt;&quot;, &quot;&lt;&quot;, &quot;&gt;=&quot;, &quot;&lt;=&quot; or &quot;=&quot; <br> If also including <em>geofence_id</em> or if &quot;Geofence&quot; source trigger, accepted values: &quot;Exit&quot; or &quot;Entry&quot; <br> See <a href="#value-operator-1">notes</a></td>
+</tr>
+<tr>
+<td>duration</td>
+<td><em>Conditional</em></td>
+<td>INT</td>
+<td>[0.. ∞)</td>
+<td>Duration (seconds) a value must satisfy the trigger condition before the trigger occurs <br> Mandatory if changing trigger source from &quot;Geofence&quot; to &quot;Sensor&quot; <br> If also including <em>geofence_id</em> parameter <em>duration</em> defaults to &quot;0&quot;, and must be &quot;0&quot; if explicitly included</td>
+</tr>
+<tr>
+<td>device_alarm</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Device alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>site_alarm</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 3</td>
+<td>Site alarm status on trigger occur <br> Either (0) &quot;Off&quot; or (1) &quot;On&quot;</td>
+</tr>
+<tr>
+<td>trigger_email</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger email</td>
+</tr>
+<tr>
+<td>trigger_sms</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger sms number</td>
+</tr>
+<tr>
+<td>trigger_phone</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger phone number</td>
+</tr>
+<tr>
+<td>trigger_fax</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 45</td>
+<td>Trigger fax number</td>
+</tr>
+<tr>
+<td>suggested_actions</td>
+<td>Optional</td>
+<td>STRING</td>
+<td>Length &lt;= 1000</td>
+<td>Suggested action string</td>
+</tr>
+<tr>
+<td>reaction</td>
+<td>Optional</td>
+<td>INT | STRING</td>
+<td>[0.. 1], or <br> Length &lt;= 11</td>
+<td>Reaction required on trigger occur <br> Either (0) &quot;Acknowledge&quot; or (1) &quot;Action&quot;</td>
+</tr>
+<tr>
+<td>active_status</td>
+<td>Optional</td>
+<td>INT</td>
+<td>[0.. 1]</td>
+<td>Trigger is either active (0) or inactive (1)</td>
+</tr>
+</tbody>
+</table>
+<br>
+<h2 id="notes-1">Notes</h2>
+<h3 id="value-operator-1"><strong>Value Operator</strong></h3>
+<p>Value comparison operator. Used with sensor values to compare a value against <em>trigger_value</em> to determine if a trigger occurs. Used with geofence triggers to define trigger on &quot;Entry&quot; or &quot;Exit&quot;</p>
+<p>Format for &quot;Sensor&quot; triggers is:
+sensor value <em>value_operator</em> <em>trigger_value</em></p>
+<pre><code class="language-json"><div><span class="hljs-comment">//  Example values</span>
+    sensor value : <span class="hljs-number">10</span>    
+    value_operator : <span class="hljs-string">&quot;&gt;&quot;</span>
+    trigger_value : <span class="hljs-number">15</span>
+
+<span class="hljs-comment">//  Resulting check</span>
+    <span class="hljs-number">10</span> &gt; <span class="hljs-number">15</span> 
+
+<span class="hljs-comment">//  Sensor value 10 is not greater than trigger value 15, so no trigger occurs    </span>
+</div></code></pre>
+<br>
+<h2 id="update-response-success">UPDATE RESPONSE (SUCCESS)</h2>
+<p>Response success returns the updated trigger information, as well as an error: NO_ERROR code</p>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+    <span class="hljs-comment">//  Response values</span>
+{
+    <span class="hljs-attr">&quot;trigger_name&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_type&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_level&quot;</span>: INT,
+    <span class="hljs-attr">&quot;trigger_source&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;sd_id&quot;</span>: INT,
+    <span class="hljs-attr">&quot;trigger_value&quot;</span>: INT,
+    <span class="hljs-attr">&quot;geofence_id&quot;</span> : INT,
+    <span class="hljs-attr">&quot;value_operator&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;duration&quot;</span>: INT,
+    <span class="hljs-attr">&quot;device_alarm&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;site_alarm&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_email&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_sms&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_phone&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;trigger_fax&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;suggested_actions&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;reaction&quot;</span>: STRING,
+    <span class="hljs-attr">&quot;active_status&quot;</span>: INT,
+    <span class="hljs-attr">&quot;error&quot;</span>: <span class="hljs-string">&quot;NO_ERROR&quot;</span>        <span class="hljs-comment">//  Error code   </span>
+}
+    <span class="hljs-comment">//  Example</span>
+{
+    <span class="hljs-attr">&quot;trigger_id&quot;</span>: <span class="hljs-string">&quot;17&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_value&quot;</span>: <span class="hljs-string">&quot;10&quot;</span>,
+    <span class="hljs-attr">&quot;value_operator&quot;</span>: <span class="hljs-string">&quot;&gt;&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_name&quot;</span>: <span class="hljs-string">&quot;Temperature above 10C&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_type&quot;</span>: <span class="hljs-string">&quot;Critical&quot;</span>,
+    <span class="hljs-attr">&quot;trigger_phone&quot;</span>: <span class="hljs-string">&quot;+12345678&quot;</span>,
+    <span class="hljs-attr">&quot;suggested_actions&quot;</span>: <span class="hljs-string">&quot;Call supervisor immediately. Check fridges immediately&quot;</span>,
+    <span class="hljs-attr">&quot;reaction&quot;</span> : <span class="hljs-string">&quot;Action&quot;</span>,
+    <span class="hljs-attr">&quot;error&quot;</span>: <span class="hljs-string">&quot;NO_ERROR&quot;</span>         <span class="hljs-comment">//  Error code</span>
+}
+</div></code></pre>
+<br>
+<h2 id="update-response-failure">UPDATE RESPONSE (FAILURE)</h2>
+<pre><code class="language-json"><div>Content-Type: application/json
+
+    <span class="hljs-comment">//  Error value</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : ERROR_CODE
+}
+    <span class="hljs-comment">//  Example error</span>
+{
+    <span class="hljs-attr">&quot;error&quot;</span> : <span class="hljs-string">&quot;INVALID_TOKEN&quot;</span>
+}
+
+</div></code></pre>
+<br>
+<table>
+<thead>
+<tr>
+<th>Error Code</th>
+<th>Explanation</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>INVALID_TOKEN</td>
+<td>1. Token has timed out, or <br> 2. Token is invalid</td>
+<td>Provide a new token</td>
+</tr>
+<tr>
+<td>INVALID_REQUEST_PRAM</td>
+<td>1. &quot;action&quot; parameter is missing, or <br> 2. incorrect JSON format</td>
+<td>1. Include required parameter, or <br> 2. check request JSON for incorrect data</td>
+</tr>
+<tr>
+<td>INVALID_ACTION_PRAM</td>
+<td>&quot;action&quot; parameter is not select, update or insert</td>
+<td>Alter parameter to &quot;update&quot;</td>
+</tr>
+<tr>
+<td>INVALID_INPUT_PRAM</td>
+<td>Input parameter does not exist or is spelt incorrectly</td>
+<td>Remove parameter or alter parameter to correct spelling. <br> This error is accompanied with subsequent message &quot;error_detail: INVALID_PRAM_X&quot;, where X is the first occuring invalid parameter</td>
+</tr>
+<tr>
+<td>NO_UPDATED_PRAM</td>
+<td>No updatable parameter provided</td>
+<td>Include minimum 1 updatable parameter in query</td>
+</tr>
+<tr>
+<td>INVALID_INCOMPATABLE_SENSOR_AND_GEOFENCE_PRAM</td>
+<td>Incompatable paramaters included in query <br> <em>geofence_id</em> is incompatable with <em>sd_id</em> and <em>trigger_value</em></td>
+<td>Remove parameters as appropriate</td>
+</tr>
+<tr>
+<td>MISSING_TRIGGER_ID_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_SD_ID_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_TRIGGER_VALUE_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>MISSING_VALUE_OPERATOR_PRAM</td>
+<td>Missing required parameter</td>
+<td>Include required parameter in query</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_VALUE_RANGE_PRAM</td>
+<td>1. Update <em>sd_id</em> parameter data min-max values do not encompass the already listed <em>trigger_value</em>, or <br> 2. Update <em>trigger_value</em> is not a value encompassed by already listed <em>sd_id</em> data min-max values, or <br> 3. Update <em>sd_id</em> parameter data min-max values do not encompass update <em>trigger_value</em></td>
+<td>1. Alter parameter to a valid value, or <br> 2. Include a valid <em>trigger_value</em> as an update parameter</td>
+</tr>
+<tr>
+<td>GEOFENCE_LOCKED</td>
+<td>Geofence is locked. This geofence cannot be associated with any trigger updates</td>
+<td>No action necessary</td>
+</tr>
+<tr>
+<td>TRIGGER_LOCKED</td>
+<td>Trigger is locked. Only <em>trigger_name</em> parameter can be updated</td>
+<td>No action necessary</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_ID_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_NAME_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_TYPE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_LEVEL_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SD_ID_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. <em>sd_id</em> is not a valid active <em>sd_id</em></td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_VALUE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_GEOFENCE_ID_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. <em>geofence_id</em> is not a valid active <em>geofence_id</em></td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_VALUE_OPERATOR_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. Incompatable <em>value_operator</em> parameter used for trigger source</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DURATION_PRAM</td>
+<td>1. Parameter value is unsupported, or <br> 2. Duration is not 0 when trigger_source &quot;Geofence&quot;</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_DEVICE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SITE_ALARM_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_EMAIL_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_SMS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_PHONE_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_TRIGGER_FAX_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_SUGGESTED_ACTIONS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_REACTION_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+<tr>
+<td>INVALID_ACTIVE_STATUS_PRAM</td>
+<td>Parameter value is unsupported</td>
+<td>Alter parameter to valid value</td>
+</tr>
+</tbody>
+</table>
+<br>
+<hr>
+<hr>
+<br>
+<h3 id="last-modified-07-09-2021-by-c-rollinson">Last modified 07-09-2021 by C. Rollinson</h3>
+
+    </body>
+    </html>
